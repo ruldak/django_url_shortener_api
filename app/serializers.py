@@ -11,11 +11,11 @@ class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
         fields = [
-            'id', 'short_code', 'edit_key', 'long_url', 'short_url', 
+            'id', 'short_code', 'long_url', 'short_url', 
             'created_at', 'expires_at', 'is_active', 
             'click_count', 'title', 'is_expired', 'created_by',
         ]
-        read_only_fields = ['short_code', 'created_at', 'edit_key', 'click_count', 'created_by']
+        read_only_fields = ['short_code', 'created_at', 'click_count', 'created_by']
     
     def get_short_url(self, obj):
         request = self.context.get('request')

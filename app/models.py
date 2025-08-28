@@ -6,7 +6,6 @@ from datetime import timedelta
 
 class Link(models.Model):
     short_code = models.CharField(max_length=20, unique=True, db_index=True)
-    edit_key = models.CharField(max_length=40, unique=True, default=shortuuid.uuid)
     long_url = models.URLField(max_length=2000)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
