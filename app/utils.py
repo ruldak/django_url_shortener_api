@@ -50,27 +50,21 @@ def get_client_ip(request):
 
     # For testing purposes, if the IP is localhost, use a public IP
     if ip == '127.0.0.1':
-        return '8.8.8.8'  # Google's public DNS server IP
+        return '8.8.8.8'
 
     return ip
 
-# Construct path to the GeoIP database
 GEOIP_DATABASE_PATH = os.path.join(settings.BASE_DIR, 'app', 'data', 'GeoLite2-Country.mmdb')
 
-# Create the reader object once when the module is loaded (caching).
 try:
     if os.path.exists(GEOIP_DATABASE_PATH):
         GEOIP_READER = geoip2.database.Reader(GEOIP_DATABASE_PATH)
     else:
         GEOIP_READER = None
 except Exception:
-    # If the database is corrupt or there's an error, set reader to None
     GEOIP_READER = None
 
 def get_country_from_ip(ip):
-    """
-    Looks up the country of an IP address using the cached GeoIP database reader.
-    """
     if not ip or not GEOIP_READER:
         return None
 
@@ -78,8 +72,6 @@ def get_country_from_ip(ip):
         response = GEOIP_READER.country(ip)
         return response.country.name
     except geoip2.errors.AddressNotFoundError:
-        # The IP address was not found in the database
         return None
     except Exception:
-        # Handle other potential errors
         return None

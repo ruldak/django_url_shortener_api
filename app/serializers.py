@@ -27,13 +27,11 @@ class LinkSerializer(serializers.ModelSerializer):
         return obj.is_expired()
     
     def validate_long_url(self, value):
-        # Validasi dasar URL
         if not value.startswith(('http://', 'https://')):
             raise serializers.ValidationError("URL must start with http:// or https://")
         return value
     
     def validate(self, data):
-        # Validasi custom untuk expiration date
         expires_at = data.get('expires_at')
         if expires_at and expires_at < timezone.now():
             raise serializers.ValidationError("Expiration date must be in the future")
@@ -65,15 +63,12 @@ class LinkAnalyticsSerializer(serializers.ModelSerializer):
         ]
     
     def get_clicks_by_day(self, obj):
-        # Ini akan diimplementasi di view
         return self.context.get('clicks_by_day', [])
     
     def get_clicks_by_country(self, obj):
-        # Ini akan diimplementasi di view
         return self.context.get('clicks_by_country', [])
     
     def get_clicks_by_device(self, obj):
-        # Ini akan diimplementasi di view
         return self.context.get('clicks_by_device', [])
 
 

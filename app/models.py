@@ -30,7 +30,7 @@ class Link(models.Model):
         if not self.short_code:
             self.short_code = shortuuid.ShortUUID().random(length=8)
         
-        if not self.expires_at and not self.pk:  # Hanya untuk objek baru
+        if not self.expires_at and not self.pk:
             self.expires_at = timezone.now() + timedelta(days=30)
         super().save(*args, **kwargs)
 
