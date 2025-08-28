@@ -32,7 +32,7 @@ SECRET_KEY =  env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['your-username.pythonanywhere.com']
+ALLOWED_HOSTS = env.list("ALLOWED_HOST", default=[])
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 
