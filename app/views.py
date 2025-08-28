@@ -19,7 +19,6 @@ class RegisterView(generics.CreateAPIView):
 
 class LinkListCreateView(generics.ListCreateAPIView):
     serializer_class = LinkSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
     def get_queryset(self):
         queryset = Link.objects.filter(is_active=True)
