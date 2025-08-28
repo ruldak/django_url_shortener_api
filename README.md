@@ -26,8 +26,8 @@ This is a Django-based URL shortener application that allows users to create, ma
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
-    cd url_shortener
+    git clone https://github.com/ruldak/django_url_shortener_api.git your_directory
+    cd your_directory
     ```
 
 2.  **Create and activate a virtual environment:**
