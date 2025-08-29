@@ -2,6 +2,13 @@
 
 This is a Django-based URL shortener application that allows users to create, manage, and track short URLs. It provides a RESTful API for creating, retrieving, updating, and deleting links, as well as tracking analytics for each link.
 
+## 🔗 Frontend
+
+The frontend for this project is available in a separate repository:  
+[Frontend Repository](https://github.com/ruldak/vue_url_shortener)
+
+Please follow the instructions in that repository to set up and run the frontend.
+
 ## Features
 
 *   **URL Shortening:** Create short codes for long URLs.
