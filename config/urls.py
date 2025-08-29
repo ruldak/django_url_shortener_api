@@ -9,5 +9,5 @@ urlpatterns = [
     path('api/links/', LinkListCreateView.as_view(), name='link-list-create'),
     path('api/links/<str:short_code>/', LinkDetailView.as_view(), name='link-detail'),
     path('api/links/<str:short_code>/analytics/', LinkAnalyticsView.as_view(), name='link-analytics'),
-    path('api/r/<str:short_code>/', LinkRedirectView.as_view(), name='link-redirect'),
+    path('r/<str:short_code>/', LinkRedirectView.as_view(), name='link-redirect'),
 ]
