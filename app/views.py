@@ -10,16 +10,27 @@ from datetime import timedelta
 from .models import Link, LinkClick
 from .serializers import LinkSerializer, LinkAnalyticsSerializer, RegisterSerializer
 from .utils import anonymize_ip, parse_user_agent, get_client_ip, get_country_from_ip
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, HasAPIKeyOrIsAuthenticated
 from django.contrib.auth.models import User
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_api_key.permissions import HasAPIKey
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
+    permission_classes = [HasAPIKey]
+
+class Login(TokenObtainPairView):
+    permission_classes = [HasAPIKey]
+
+class RefreshToken(TokenRefreshView):
+    permission_classes = [HasAPIKey]
 
 class LinkListCreateView(generics.ListCreateAPIView):
     serializer_class = LinkSerializer
-    
+    permission_classes = [HasAPIKeyOrIsAuthenticated]
+
     def get_queryset(self):
         queryset = Link.objects.filter(is_active=True)
         
@@ -87,7 +98,7 @@ class LinkRedirectView(APIView):
 
 class LinkAnalyticsView(generics.RetrieveAPIView):
     serializer_class = LinkAnalyticsSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, HasAPIKeyOrIsAuthenticated]
     lookup_field = 'short_code'
     
     def get_queryset(self):
